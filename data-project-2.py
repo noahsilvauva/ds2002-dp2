@@ -43,3 +43,9 @@ print(colls)
 
 count = data_project_2.count_documents({})
 print(count)
+
+# Sources:
+
+# https://www.geeksforgeeks.org/formatted-string-literals-f-strings-python/
+# https://docs.python.org/3/tutorial/errors.html
+# https://www.w3schools.com/python/python_file_write.asp
