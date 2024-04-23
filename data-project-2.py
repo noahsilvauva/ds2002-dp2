@@ -38,6 +38,7 @@ for (root, dirs, file) in os.walk(path):
                 no_import_count += 1
                 print(f)
                 print(len(file_data))
+                continue
 
 print(import_count)
 print(no_import_count)
