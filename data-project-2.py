@@ -19,9 +19,13 @@ path = "data"
 # Imported document count
 import_count = 0
 
-# Can't be imported count from json.decoder.JSONDecodeError
-no_import_count = 0
+# Corrupted count from json.decoder.JSONDecodeError
+corrupt_count = 0
 
+# Complete but not imported because of json.decoder.JSONDecodeError
+complete_not_imported_count = 0
+
+# Delete any files imported into the database from running the script earlier
 data_project_2.delete_many({})
 
 for (root, dirs, file) in os.walk(path):
@@ -35,18 +39,13 @@ for (root, dirs, file) in os.walk(path):
                     data_project_2.insert_one(file_data)
                 import_count += len(file_data)
             except json.decoder.JSONDecodeError:
-                no_import_count += 1
-                print(f)
-                print(len(file_data))
+                corrupt_count += 1
+                complete_not_imported_count += len(file_data) - 1
                 continue
 
-print(import_count)
-print(no_import_count)
-
-
-
-
-
+print("Records imported: ", import_count)
+print("Records orphaned: ", complete_not_imported_count)
+print("Records corrupted: ", corrupt_count)
 
 
 
